@@ -1,4 +1,4 @@
-import { formatCurrency, formatDate } from "../utils";
+import { formatDate } from "../utils";
 
 function TransactionsTable({ data }) {
   return (
@@ -6,37 +6,45 @@ function TransactionsTable({ data }) {
       <table className="table">
         <thead>
           <tr>
-            <th>Customer</th>
-            <th>Phone</th>
-            <th>Region</th>
-            <th>Product</th>
-            <th>Category</th>
-            <th>Payment</th>
-            <th>Quantity</th>
-            <th>Final amount</th>
+            <th>Transaction ID</th>
             <th>Date</th>
-            <th>Status</th>
+            <th>Customer ID</th>
+            <th>Customer Name</th>
+            <th>Phone No.</th>
+            <th>Gender</th>
+            <th>Age</th>
+            <th>Product Category</th>
+            <th>Quantity</th>
+            <th>Total Amount</th>
+            <th>Customer Region</th>
+            <th>Product ID</th>
+            <th>Employee Name</th>
           </tr>
         </thead>
+
         <tbody>
-          {data.map((row) => (
-            <tr key={row._id}>
-              <td>{row.customerName}</td>
-              <td>{row.phoneNumber}</td>
-              <td>{row.customerRegion}</td>
-              <td>{row.productName}</td>
-              <td>{row.productCategory}</td>
-              <td>{row.paymentMethod}</td>
-              <td>{row.quantity}</td>
-              <td>{formatCurrency(row.finalAmount)}</td>
-              <td>{formatDate(row.date)}</td>
-              <td>
-                <span className={`status-pill status-${(row.orderStatus || "unknown").toLowerCase()}`}>
-                  {row.orderStatus || "Unknown"}
-                </span>
-              </td>
-            </tr>
-          ))}
+          {data.map((row) => {
+            const transactionId =
+              row.transactionId || String(row._id).slice(-8);
+
+            return (
+              <tr key={row._id}>
+                <td>{transactionId}</td>
+                <td>{formatDate(row.date)}</td>
+                <td>{row.customerId}</td>
+                <td>{row.customerName}</td>
+                <td>{row.phoneNumber}</td>
+                <td>{row.gender}</td>
+                <td>{row.age}</td>
+                <td>{row.productCategory}</td>
+                <td>{row.quantity}</td>
+                <td>{row.totalAmount}</td>
+                <td>{row.customerRegion}</td>
+                <td>{row.productId}</td>
+                <td>{row.employeeName}</td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>

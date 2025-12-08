@@ -5,6 +5,7 @@ import SortDropdown from "./components/SortDropdown.jsx";
 import TransactionsTable from "./components/TransactionsTable.jsx";
 import Pagination from "./components/Pagination.jsx";
 import useSalesQuery from "./hooks/useSalesQuery.js";
+import { formatCurrency } from "./utils"; // ✅ NEW
 
 function App() {
   const [search, setSearch] = useState("");
@@ -31,6 +32,18 @@ function App() {
     limit,
   });
 
+  // ✅ summary values for current page
+  const totalUnits = data.reduce((sum, row) => sum + (row.quantity || 0), 0);
+  const totalAmount = data.reduce(
+    (sum, row) => sum + (row.totalAmount || 0),
+    0
+  );
+  const totalDiscount = data.reduce(
+    (sum, row) =>
+      sum + ((row.totalAmount || 0) - (row.finalAmount || row.totalAmount || 0)),
+    0
+  );
+
   function handleSearchChange(value) {
     setSearch(value);
     setPage(1);
@@ -55,9 +68,35 @@ function App() {
       <header className="app-header">
         <div className="app-title-group">
           <h1 className="app-title">Sales Overview</h1>
-          <p className="app-subtitle">Search, filter and explore transaction data</p>
+          <p className="app-subtitle">
+            Search, filter and explore transaction data
+          </p>
         </div>
       </header>
+
+      {/* ✅ SUMMARY CARDS just below navbar */}
+      <div className="summary-cards">
+        <div className="summary-card">
+          <p className="summary-label">Total units sold</p>
+          <h3 className="summary-value">{totalUnits}</h3>
+        </div>
+
+        <div className="summary-card">
+          <p className="summary-label">Total amount</p>
+          <h3 className="summary-value">
+            {formatCurrency(totalAmount)}{" "}
+            <span className="summary-sub">
+              ({data.length} SR{data.length === 1 ? "" : "s"})
+            </span>
+          </h3>
+        </div>
+
+        <div className="summary-card">
+          <p className="summary-label">Total discount</p>
+          <h3 className="summary-value">{formatCurrency(totalDiscount)}</h3>
+        </div>
+      </div>
+
       <div className="app-main">
         <aside className="sidebar">
           <FilterPanel filters={filters} onChange={handleFilterChange} />

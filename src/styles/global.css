@@ -47,6 +47,8 @@ body {
   gap: 18px;
 }
 
+/* HEADER */
+
 .app-header {
   display: flex;
   align-items: center;
@@ -75,6 +77,49 @@ body {
   font-size: 13px;
   color: var(--text-soft);
 }
+
+/* ===== SUMMARY CARDS BELOW NAVBAR ===== */
+
+.summary-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: -4px;
+  margin-bottom: 10px;
+}
+
+.summary-card {
+  background: var(--bg-elevated);
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-soft);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.summary-label {
+  font-size: 12px;
+  color: var(--text-soft);
+  margin: 0;
+}
+
+.summary-value {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.summary-sub {
+  font-size: 11px;
+  color: var(--text-soft);
+}
+
+/* MAIN LAYOUT */
 
 .app-main {
   flex: 1;
@@ -112,6 +157,8 @@ body {
 .search-bar {
   flex: 1;
 }
+
+/* FORM ELEMENTS */
 
 .input {
   width: 100%;
@@ -156,6 +203,8 @@ body {
   margin-bottom: 4px;
 }
 
+/* BUTTONS */
+
 .button {
   border-radius: var(--radius-pill);
   font-size: 12px;
@@ -186,6 +235,8 @@ body {
   color: var(--accent);
   padding: 0;
 }
+
+/* FILTER PANEL */
 
 .filter-panel {
   display: flex;
@@ -223,6 +274,8 @@ body {
   width: 100%;
 }
 
+/* SORT DROPDOWN */
+
 .sort-dropdown {
   display: flex;
   align-items: center;
@@ -236,6 +289,8 @@ body {
 .sort-select {
   width: auto;
 }
+
+/* TABLE */
 
 .table-wrapper {
   border-radius: var(--radius-md);
@@ -274,6 +329,8 @@ body {
 .table tbody tr:hover {
   background-color: rgba(30, 64, 175, 0.3);
 }
+
+/* STATUS PILLS + MESSAGES */
 
 .status-pill {
   padding: 3px 9px;
@@ -321,6 +378,8 @@ body {
   color: var(--text-soft);
 }
 
+/* PAGINATION */
+
 .pagination {
   margin-top: 6px;
   display: flex;
@@ -343,6 +402,8 @@ body {
   color: var(--text-soft);
 }
 
+/* RESPONSIVE */
+
 @media (max-width: 960px) {
   .app-main {
     grid-template-columns: 1fr;
@@ -363,5 +424,9 @@ body {
 
   .sort-dropdown {
     justify-content: flex-end;
+  }
+
+  .summary-cards {
+    grid-template-columns: 1fr;
   }
 }
